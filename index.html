@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>LafLa-Pro</title>
+</head>
+<body>
+    <h1>LafLa-Pro</h1>
+    <p>Bakiyen: <span id="bakiye">20</span> Kalp ❤️</p>
+
+    <div id="paketler" style="display:none; border:2px solid red; padding:10px;">
+        <h2>Kalbin Yetersiz! Lütfen Satın Al:</h2>
+        <ul>
+            <li>600 Kalp - 200 TL</li>
+            <li>900 Kalp - 230 TL</li>
+            <li>1150 Kalp - 500 TL</li>
+            <li>3900 Kalp - 900 TL</li>
+            <li>9500 Kalp - 2500 TL</li>
+            <li>21000 Kalp - 4800 TL</li>
+        </ul>
+        <button onclick="kapatPaket()">Kapat</button>
+    </div>
+
+    <hr>
+    <h3>Aktif Kullanıcılar</h3>
+    <div onclick="gorusmeBaslat(80)">
+        <p><strong>Selen</strong> - 80 Kalp/dk 🎥</p>
+        <button>Görüşmeyi Başlat</button>
+    </div>
+
+    <script>
+        let bakiye = 20; // Şu anki bakiyen
+
+        function gorusmeBaslat(fiyat) {
+            if (bakiye < fiyat) {
+                document.getElementById('paketler').style.display = 'block';
+            } else {
+                alert('Görüşme başlatılıyor...');
+            }
+        }
+
+        function kapatPaket() {
+            document.getElementById('paketler').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
