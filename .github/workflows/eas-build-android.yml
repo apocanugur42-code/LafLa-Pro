@@ -15,7 +15,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
-          cache: 'yarn'
 
       - name: Setup Expo EAS
         uses: expo/expo-github-action@v8
@@ -23,11 +22,10 @@ jobs:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
-      - name: Install dependencies
-        run: yarn install --immutable
-
-      - name: Build Android App
-        run: eas build --platform android --profile production --local
+      - name: Force Install and Build
+        run: |
+          npm install --legacy-peer-deps || yarn install
+          eas build --platform android --profile production --local
         env:
           EXPO_PUBLIC_FIREBASE_API_KEY: "AlzaSyAs..."
           EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN: "lafla-pro.firebaseapp.com"
