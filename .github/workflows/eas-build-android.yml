@@ -15,6 +15,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
+          cache: 'yarn'
 
       - name: Setup Expo EAS
         uses: expo/expo-github-action@v8
@@ -22,13 +23,16 @@ jobs:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
+      - name: Install dependencies
+        run: yarn install --immutable
+
       - name: Build Android App
         run: eas build --platform android --profile production --local
         env:
-          EXPO_PUBLIC_FIREBASE_API_KEY: "AIzaSyAs..."
+          EXPO_PUBLIC_FIREBASE_API_KEY: "AlzaSyAs..."
           EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN: "lafla-pro.firebaseapp.com"
           EXPO_PUBLIC_FIREBASE_PROJECT_ID: "lafla-pro"
           EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET: "lafla-pro.appspot.com"
           EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: "430153070881"
           EXPO_PUBLIC_FIREBASE_APP_ID: "1:430153070881:web:428b1165059668cc482660"
-          EXPO_PUBLIC_REVENUECAT_ANDROID_API_KEY: "goog_jTOZnGwiCzeeTwlzTNJiVkiAdZT"
+          EXPO_PUBLIC_REVENUECAT_ANDROID_API_KEY: "goog_jTOZnGwiczeeTwlzTNJiVkiAdZT"
