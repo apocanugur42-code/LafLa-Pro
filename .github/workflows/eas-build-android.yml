@@ -22,9 +22,9 @@ jobs:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
-      - name: Force Install and Build
+      - name: Clean Install and Build
         run: |
-          npm install --legacy-peer-deps || yarn install
+          npm install --legacy-peer-deps
           eas build --platform android --profile production --local
         env:
           EXPO_PUBLIC_FIREBASE_API_KEY: "AlzaSyAs..."
