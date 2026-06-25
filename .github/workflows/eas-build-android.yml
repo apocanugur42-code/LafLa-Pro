@@ -1,0 +1,44 @@
+name: EAS Android Production Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Android (Production)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install dependencies
+        working-directory: artifacts/marketplace
+        run: pnpm install
+
+      - name: Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Run EAS Build
+        working-directory: artifacts/marketplace
+        run: eas build --platform android --profile production --non-interactive
+        env:
+          EXPO_PUBLIC_FIREBASE_API_KEY: "AIzaSyD4Y5txr5mKHGa6hBUCY4HQHc01DF5-dl4"
+          EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN: "lafla-pro.firebaseapp.com"
+          EXPO_PUBLIC_FIREBASE_PROJECT_ID: "lafla-pro"
+          EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET: "lafla-pro.appspot.com"
+          EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: "430153070881"
+          EXPO_PUBLIC_FIREBASE_APP_ID: "1:430153070881:web:428b1165059668cc482660"
+          EXPO_PUBLIC_REVENUECAT_ANDROID_API_KEY: "goog_jTOZnGwiCzeeTwlzTNJiVkiAdZT"
