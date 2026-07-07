@@ -5,7 +5,7 @@
   "main": "expo-router/entry",
   "scripts": {
     "dev": "expo start",
-    
+    "install": "yarn install",
     "build": "node scripts/build.js",
     "serve": "node server/serve.js",
     "typecheck": "tsc -p tsconfig.json --noEmit"
